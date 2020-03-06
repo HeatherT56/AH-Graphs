@@ -9,9 +9,9 @@ from matplotlib.ticker import AutoMinorLocator, MaxNLocator
 
 # #### Specify graph title, data and labels
 
-title = 'Compound pendulum experiment'
+title = 'Compound Pendulum Experiment'
 
-xlabel = 'Length * time Period squared / $ms^2$'
+xlabel = 'Length * Time Period Squared / $ms^2$'
 xvalues = [    
 0.442,
 0.399,
@@ -25,7 +25,7 @@ xvalues = [
 0.163,
 ]
 
-ylabel = 'Length squared / $m^2$'
+ylabel = 'Length Squared / $m^2$'
 yvalues = [
 0.0784,
 0.0678,
