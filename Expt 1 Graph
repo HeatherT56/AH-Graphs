@@ -1,0 +1,112 @@
+# ## Drawing a physics graph with python    
+
+# #### Import libraries    
+
+from scipy import stats
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.ticker import AutoMinorLocator, MaxNLocator
+
+# #### Specify graph title, data and labels
+
+title = 'Simple Pendulum Experiment'
+
+xlabel = 'Length / $m$'
+xvalues = [    
+1,
+0.8,
+0.6,
+0.4,
+0.3,
+0.2,
+]
+
+ylabel = 'Period squared / $s^2$'
+yvalues = [
+4.1241,
+3.3985,
+2.5485,
+1.7870,
+1.3823,
+0.9516,
+]
+
+# #### specify limits for xaxis and yaxis
+
+xmin = 0.15
+xmax = 1.05
+
+ymin = 0.5
+ymax = 4.5
+
+# #### specify uncertainty in x and y values
+
+ex = [
+0.0005,
+0.0005,
+0.0005,
+0.0005,
+0.0005,
+0.0005,
+]
+
+ey = [
+0.002656,
+0.000767,
+0.002100,
+0.003668,
+0.003838,
+0.006438,
+]
+
+# #### Calculate Ordinary least Squares fit on the data
+slope, intercept, r_value, p_value, std_err = stats.linregress(xvalues, yvalues)
+
+# #### Plot graph
+
+# Create scatterplot and reduce width and size of markers
+#plt.scatter(xvalues, yvalues, marker='x', linewidth=0.2, s = 15)
+
+# Create limits for plot
+plt.xlim(xmin, xmax)
+plt.ylim(ymin, ymax)
+
+# Add title and labels with padding
+plt.title(title, pad=20)
+plt.xlabel(xlabel,labelpad=10)
+plt.ylabel(ylabel,labelpad=10)
+
+# Show the major grid lines with dark black lines
+plt.grid(b=True, which='major', linewidth = 0.1, color='k', linestyle='-')
+
+# Show the minor grid lines with very faint black lines
+plt.minorticks_on()
+plt.grid(b=True, which='minor', linewidth = 0.1, color='k', linestyle='-' , alpha=0.2)
+
+# Change number of minor gridlines    
+ax = plt.gca()  
+ax.xaxis.set_minor_locator(AutoMinorLocator(10))
+ax.yaxis.set_minor_locator(AutoMinorLocator(10))
+
+# Change number of major gridlines 
+ax.xaxis.set_major_locator(MaxNLocator())
+ax.yaxis.set_major_locator(MaxNLocator())
+
+# plot error bars
+plt.errorbar(xvalues, yvalues, yerr=ey, xerr=ex, fmt=',',elinewidth = 0.2, capsize=2, capthick=0.2)
+
+# Plot line of best fit using gradient and intecept from OLS regression
+x = np.linspace(xmin, xmax, 2)
+plt.plot(x, x*slope + intercept, linewidth=0.3, alpha=0.5, color = 'r')
+
+# Tidy up layout
+plt.tight_layout()
+
+# Export as .png, to speed up edits reduce dpi to 200
+plt.savefig('physics_graph.png', dpi=600)
+
+# #### Main results of OLS fit
+
+print('gradient =', slope)
+print('uncertainty in gradient = +/-', std_err)
+print('y-intercept =', intercept)
