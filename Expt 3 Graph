@@ -1,0 +1,85 @@
+# ## Drawing a physics graph with python    
+
+# #### Import libraries    
+
+from scipy import stats
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.ticker import AutoMinorLocator, MaxNLocator
+
+# #### Specify graph title, data and labels
+
+title = 'Katers Pendulum Experiment'
+
+xlabel = 'Period_1 Sqaured - Period_2 Sqaured / $s^2$'
+xvalues = [    
+0.04549407,
+0.00931245,
+0.16239585,
+0.09777255,
+0.0692172,
+]
+
+ylabel = 'Period_1 Sqaured + Period_2 Squared / $s^2$'
+yvalues = [
+9.75455585,
+9.83239733,
+10.11890273,
+9.96611993,
+9.84360618,
+]
+
+# #### specify limits for xaxis and yaxis
+
+xmin = -0.2
+xmax = 0.3
+
+ymin = 9.6
+ymax = 10.4
+
+# #### specify uncertainty in x and y values
+
+ex = [
+0.03778902835,
+0.2001501854,
+0.07769483843,
+0.03479235112,
+0.03914815997,
+]
+
+ey = [
+0.03778902835,
+0.2001501854,
+0.07769483843,
+0.03479235112,
+0.03914815997,
+]
+
+# #### Calculate Ordinary least Squares fit on the data
+slope, intercept, r_value, p_value, std_err = stats.linregress(xvalues, yvalues)
+
+# #### Plot graph
+
+# Create scatterplot and reduce width and size of markers
+plt.scatter(xvalues, yvalues, marker='x', linewidth=0.2, s = 15)
+
+# Create limits for plot
+plt.xlim(xmin, xmax)
+plt.ylim(ymin, ymax)
+
+# Add title and labels with padding
+plt.title(title, pad=20)
+plt.xlabel(xlabel,labelpad=10)
+plt.ylabel(ylabel,labelpad=10)
+
+# Show the major grid lines with dark black lines
+plt.grid(b=True, which='major', linewidth = 0.2, color='k', linestyle='-')
+
+# Show the minor grid lines with very faint black lines
+plt.minorticks_on()
+plt.grid(b=True, which='minor', linewidth = 0.2, color='k', linestyle='-', alpha=0.2)
+
+# Change number of minor gridlines    
+ax = plt.gca()  
+ax.xaxis.set_major_locator(MaxNLocator())
+ax.yaxis.set_major_locator(MaxNLocator())
