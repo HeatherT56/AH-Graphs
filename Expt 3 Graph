@@ -11,7 +11,7 @@ from matplotlib.ticker import AutoMinorLocator, MaxNLocator
 
 title = 'Katers Pendulum Experiment'
 
-xlabel = 'Period_1 Sqaured - Period_2 Sqaured / $s^2$'
+xlabel = 'Period_1 Squared - Period_2 Squared / $s^2$'
 xvalues = [    
 0.04549407,
 0.00931245,
@@ -20,7 +20,7 @@ xvalues = [
 0.0692172,
 ]
 
-ylabel = 'Period_1 Sqaured + Period_2 Squared / $s^2$'
+ylabel = 'Period_1 Squared + Period_2 Squared / $s^2$'
 yvalues = [
 9.75455585,
 9.83239733,
