@@ -83,3 +83,22 @@ plt.grid(b=True, which='minor', linewidth = 0.2, color='k', linestyle='-', alpha
 ax = plt.gca()  
 ax.xaxis.set_major_locator(MaxNLocator())
 ax.yaxis.set_major_locator(MaxNLocator())
+
+# plot error bars
+plt.errorbar(xvalues, yvalues, yerr=ey, xerr=ex, fmt=',',elinewidth = 0.2, capsize=2, capthick=0.2)
+
+# Plot line of best fit using gradient and intecept from OLS regression
+x = np.linspace(xmin, xmax, 2)
+plt.plot(x, x*slope + intercept, linewidth=0.3, alpha=0.5, color = 'r')
+
+# Tidy up layout
+plt.tight_layout()
+
+# Export as .png, to speed up edits reduce dpi to 200
+plt.savefig('physics_graph.png', dpi=600)
+
+# #### Main results of OLS fit
+
+print('gradient =', slope)
+print('uncertainty in gradient = +/-', std_err)
+print('y-intercept =', intercept)
